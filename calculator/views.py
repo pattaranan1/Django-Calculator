@@ -8,7 +8,10 @@ def calculation(request):
         if form.is_valid():
             x = form.cleaned_data['x']
             y = form.cleaned_data['y']
-            operator = ''
+            print(request.POST.get('+',''))
+            print(request.POST.get('-',''))
+            print(request.POST.get('x',''))
+            print(request.POST.get('/',''))
     else:
         form = calculationForm()
     return render(request,'calculator.html',{'form': form})
