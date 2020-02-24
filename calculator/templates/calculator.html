@@ -6,7 +6,17 @@
 </head>
 
 <body>
-
+    <form action="">
+        {% csrf_token %}
+        <div><span>{{form.as_p}}</span>
+            <span>
+            <div><input type="submit" name="+" value="+"></div>
+            <div><input type="submit" name="-" value="-"></div>
+            <div><input type="submit" name="x" value="*"></div>
+            <div><input type="submit" name="/" value="/"></div>
+        </span></div>
+        <div><span>Result:</span><span id="result"></span></div>
+    </form>
 </body>
 
 </html>
