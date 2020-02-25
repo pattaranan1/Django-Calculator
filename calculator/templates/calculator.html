@@ -6,16 +6,16 @@
 </head>
 
 <body>
-    <form action="">
+    <form action="" method='post'>
         {% csrf_token %}
         <div><span>{{form.as_p}}</span>
             <span>
-            <div><input type="submit" name="+" value="+"></div>
-            <div><input type="submit" name="-" value="-"></div>
-            <div><input type="submit" name="x" value="*"></div>
-            <div><input type="submit" name="/" value="/"></div>
+            <div><button type="submit" name="operator" value="add">+</button></div>
+            <div><button type="submit" name="operator" value="subtract">-</div>
+            <div><button type="submit" name="operator" value="multiply">x</div>
+            <div><button type="submit" name="operator" value="divide">/</div>
         </span></div>
-        <div><span>Result:</span><span id="result"></span></div>
+        <div><span>Result:</span><span id="result">{{result}}</span></div>
     </form>
 </body>
 
