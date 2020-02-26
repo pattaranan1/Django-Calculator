@@ -19,5 +19,5 @@ from calculator import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.calculation,name='calculation')
+    path('',views.CalculationView,name='calculation')
 ]

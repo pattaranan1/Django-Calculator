@@ -93,7 +93,6 @@ class CalculationTest(LiveServerTestCase):
         # And he see that there stll are 75 in x and 5 in y
         self.check_result('75','12','6.25')
 
-
         self.fail('finish test')
 
         

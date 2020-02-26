@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from calculator.forms import calculationForm
+from calculator.forms import CalculationForm
 from calculator.models import Calculated_history
 # Create your views here.
 
-def calculation(request):
+def CalculationView(request):
     if request.method == 'POST':
-        form = calculationForm(request.POST)
+        form = CalculationForm(request.POST)
         if form.is_valid():
             x = float(form.cleaned_data['x'])
             y = float(form.cleaned_data['y'])
@@ -16,5 +16,5 @@ def calculation(request):
 
             return render(request,'calculator.html',{'form':form,'result':result})
     else:
-        form = calculationForm()
+        form = CalculationForm()
     return render(request,'calculator.html',{'form': form})

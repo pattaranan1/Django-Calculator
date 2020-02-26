@@ -1,5 +1,5 @@
 from django import forms
 
-class calculationForm(forms.Form):
-    x = forms.CharField()
-    y = forms.CharField()
+class CalculationForm(forms.Form):
+    x = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your number'}))
+    y = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter your number'}))
