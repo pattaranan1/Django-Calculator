@@ -28,6 +28,7 @@ class CalculationTest(LiveServerTestCase):
         time.sleep(1)
     
     def check_result(self,_x,_y,_result):
+
         # Now he see the result of x - y = result in the result
         result = self.browser.find_element_by_id('result').text
         self.assertEqual(_result,result)
@@ -54,6 +55,13 @@ class CalculationTest(LiveServerTestCase):
         header = self.browser.find_element_by_id('header').text
         self.assertEqual('Calculator',header)
 
+        # He notice there are calculation history that he has calculated before
+        # that is 34.0 + 10.0 = 44.0 and 22.0 - 99.0 = -77.0
+        history_list = self.browser.find_element_by_id('history')
+        history_item = history_list.find_elements_by_name('history_item')
+        self.assertEqual('34.0 + 10.0 = 44.0',history_item[0].text)
+        self.assertEqual('22.0 - 99.0 = -77.0',history_item[1].text)
+
         # He see that there is x,y form to enter inputs, result label to show result and +,-,x,/ buttons for calculation
         # Now he want to calculate 121 + 555
         # So he enter 121 into x ,and 555 into y ,then he click on '+' button 
@@ -66,14 +74,29 @@ class CalculationTest(LiveServerTestCase):
         self.check_result('121','555','676.0')
         time.sleep(1)
 
+        # In history list , He see a new history 121.0 + 555.0 = 676.0 in the first order
+        history_list = self.browser.find_element_by_id('history')
+        history_item = history_list.find_elements_by_name('history_item')
+        self.assertEqual('121.0 + 555.0 = 676.0',history_item[0].text)
+        self.assertEqual('34.0 + 10.0 = 44.0',history_item[1].text)
+        self.assertEqual('22.0 - 99.0 = -77.0',history_item[2].text)
+
         # Then he want to calculate 1111 - 999
         # So he enter 1111 into x,and 999 into y,then he click on '-' button
         self.calculate('1111','999','-')
         time.sleep(1)
-        
+
+                
         # Now he see the result of 1111 - 999 = 112.0 in the result
         # And he see that there stll are 1111 in x and 999 in y
         self.check_result('1111','999','112.0')
+
+        # In history list , He see a new history 1111.0 - 999.0 = 112.0 in the first order
+        history_list = self.browser.find_element_by_id('history')
+        history_item = history_list.find_elements_by_name('history_item')
+        self.assertEqual('1111.0 - 999.0 = 112.0',history_item[0].text)
+        self.assertEqual('121.0 + 555.0 = 676.0',history_item[1].text)
+        self.assertEqual('34.0 + 10.0 = 44.0',history_item[2].text)
 
         # Then he want to calculate 222 x 1.7
         # So he enter 222 into x,and 4 into y,then he click on 'x' button
@@ -84,6 +107,14 @@ class CalculationTest(LiveServerTestCase):
         # And he see that there stll are 222 in x and 4 in y
         self.check_result('222','1.7','377.4')
 
+        # In history list , He see a new history 222.0 x 1.7 = 377.4 in the first order
+        history_list = self.browser.find_element_by_id('history')
+        history_item = history_list.find_elements_by_name('history_item')
+        self.assertEqual('222.0 x 1.7 = 377.4',history_item[0].text)
+        self.assertEqual('1111.0 - 999.0 = 112.0',history_item[1].text)
+        self.assertEqual('121.0 + 555.0 = 676.0',history_item[2].text)
+        
+
         # Then he want to calculate 75 / 12
         # So he enter 75 into x,and 12 into y,then he click on '/' button
         self.calculate('75','12','/')
@@ -93,6 +124,17 @@ class CalculationTest(LiveServerTestCase):
         # And he see that there stll are 75 in x and 5 in y
         self.check_result('75','12','6.25')
 
+        # In history list , He see a new history 75.0 / 12.0  = 6.25 in the first order
+        history_list = self.browser.find_element_by_id('history')
+        history_item = history_list.find_elements_by_name('history_item')
+        
+        self.assertEqual('1111.0 - 999.0 = 112.0',history_item[0].text)
+        self.assertEqual('121.0 + 555.0 = 676.0',history_item[1].text)
+        self.assertEqual('75.0 / 12.0  = 6.25',history_item[2].text)
+
         self.fail('finish test')
+
+    
+
 
         

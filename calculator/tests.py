@@ -1,7 +1,5 @@
 from django.test import TestCase
 from django.urls import resolve
-from django.http import HttpRequest
-from django.template.loader import render_to_string
 from calculator.views import CalculationView
 from calculator.forms import CalculationForm
 from calculator.models import Calculated_history
