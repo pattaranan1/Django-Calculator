@@ -10,6 +10,9 @@ class CalculationTest(LiveServerTestCase):
     
     def setUp(self):
         self.browser = webdriver.Firefox()
+        Calculated_history.objects.create(x=22.0,y=99.0,operator='-',result=-77.0)
+        Calculated_history.objects.create(x=34.0,y=10.0,operator='+',result=44.0)
+    
 
     def tearDown(self):
         self.browser.quit()
@@ -57,8 +60,8 @@ class CalculationTest(LiveServerTestCase):
 
         # He notice there are calculation history that he has calculated before
         # that is 34.0 + 10.0 = 44.0 and 22.0 - 99.0 = -77.0
-        history_list = self.browser.find_element_by_id('history')
-        history_item = history_list.find_elements_by_name('history_item')
+        history_list = self.browser.find_element_by_id('history_list')
+        history_item = history_list.find_elements_by_id('historyitem')
         self.assertEqual('34.0 + 10.0 = 44.0',history_item[0].text)
         self.assertEqual('22.0 - 99.0 = -77.0',history_item[1].text)
 
@@ -75,8 +78,8 @@ class CalculationTest(LiveServerTestCase):
         time.sleep(1)
 
         # In history list , He see a new history 121.0 + 555.0 = 676.0 in the first order
-        history_list = self.browser.find_element_by_id('history')
-        history_item = history_list.find_elements_by_name('history_item')
+        history_list = self.browser.find_element_by_id('history_list')
+        history_item = history_list.find_elements_by_id('historyitem')
         self.assertEqual('121.0 + 555.0 = 676.0',history_item[0].text)
         self.assertEqual('34.0 + 10.0 = 44.0',history_item[1].text)
         self.assertEqual('22.0 - 99.0 = -77.0',history_item[2].text)
@@ -92,8 +95,8 @@ class CalculationTest(LiveServerTestCase):
         self.check_result('1111','999','112.0')
 
         # In history list , He see a new history 1111.0 - 999.0 = 112.0 in the first order
-        history_list = self.browser.find_element_by_id('history')
-        history_item = history_list.find_elements_by_name('history_item')
+        history_list = self.browser.find_element_by_id('history_list')
+        history_item = history_list.find_elements_by_id('historyitem')
         self.assertEqual('1111.0 - 999.0 = 112.0',history_item[0].text)
         self.assertEqual('121.0 + 555.0 = 676.0',history_item[1].text)
         self.assertEqual('34.0 + 10.0 = 44.0',history_item[2].text)
@@ -108,8 +111,8 @@ class CalculationTest(LiveServerTestCase):
         self.check_result('222','1.7','377.4')
 
         # In history list , He see a new history 222.0 x 1.7 = 377.4 in the first order
-        history_list = self.browser.find_element_by_id('history')
-        history_item = history_list.find_elements_by_name('history_item')
+        history_list = self.browser.find_element_by_id('history_list')
+        history_item = history_list.find_elements_by_id('historyitem')
         self.assertEqual('222.0 x 1.7 = 377.4',history_item[0].text)
         self.assertEqual('1111.0 - 999.0 = 112.0',history_item[1].text)
         self.assertEqual('121.0 + 555.0 = 676.0',history_item[2].text)
@@ -125,12 +128,13 @@ class CalculationTest(LiveServerTestCase):
         self.check_result('75','12','6.25')
 
         # In history list , He see a new history 75.0 / 12.0  = 6.25 in the first order
-        history_list = self.browser.find_element_by_id('history')
-        history_item = history_list.find_elements_by_name('history_item')
+        history_list = self.browser.find_element_by_id('history_list')
+        history_item = history_list.find_elements_by_id('historyitem')
+        self.assertEqual('75.0 / 12.0 = 6.25',history_item[0].text)
+        self.assertEqual('222.0 x 1.7 = 377.4',history_item[1].text)
+        self.assertEqual('1111.0 - 999.0 = 112.0',history_item[2].text)
+
         
-        self.assertEqual('1111.0 - 999.0 = 112.0',history_item[0].text)
-        self.assertEqual('121.0 + 555.0 = 676.0',history_item[1].text)
-        self.assertEqual('75.0 / 12.0  = 6.25',history_item[2].text)
 
         self.fail('finish test')
 

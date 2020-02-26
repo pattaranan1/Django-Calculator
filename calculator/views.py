@@ -14,7 +14,9 @@ def CalculationView(request):
 
             Calculated_history.objects.create(x=x,y=y,operator=request.POST.get('operator'),result=result)
 
-            return render(request,'calculator.html',{'form':form,'result':result})
+            history = list(Calculated_history.objects.all())[:-11:-1]
+            return render(request,'calculator.html',{'form':form,'result':result,'history':history})
     else:
+        history = list(Calculated_history.objects.all())[:-11:-1]
         form = CalculationForm()
-    return render(request,'calculator.html',{'form': form})
+    return render(request,'calculator.html',{'form': form,'history':history})

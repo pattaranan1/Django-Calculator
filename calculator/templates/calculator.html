@@ -24,19 +24,28 @@
     <div class='content'>
         <form action="" method='post'>
             {% csrf_token %}
-            <div class='card' style="padding: 10px; width:300px;">
+            <div class='card' style="padding: 10px; width:700px;">
                 <div class='row'>
                     <div class='col form-group' style="margin: auto;"> {{form.as_p}}</div>
                     <div class='col btn-group-vertical'>
-                        <div><button id='+' class="btn btn-secondary" type="submit" name="operator" value="+">+</div>
-                        <div><button id ='-' class="btn btn-secondary" type="submit" name="operator" value="-">-</div>
-                        <div><button id ='x' class="btn btn-secondary" type="submit" name="operator" value="x">x</div>
-                        <div><button id ='/' class="btn btn-secondary" type="submit" name="operator" value="/">/</div>
-                </div>
+                        <div><button id='+' class="btn btn-secondary " type="submit" name="operator" value="+">+</div>
+                        <div><button id ='-' class="btn btn-secondary " type="submit" name="operator" value="-">-</div>
+                        <div><button id ='x' class="btn btn-secondary " type="submit" name="operator" value="x">x</div>
+                        <div><button id ='/' class="btn btn-secondary " type="submit" name="operator" value="/">/</div>
+                        </div>
+                        <div class='col' id='history_list'>
+                            <h4>Calculation History</h4>
+                            {% for item in history %}
+                                <div id='historyitem'>
+                                    {{item}}
+                                </div>
+                            {% endfor %}
+                        </div>
             </div>
             <div class='row'></div><span><strong>Result:</strong></span><span id="result">{{result}}</span></div>
            </div>
         </form>
+ 
     </div>
 </body>
 
