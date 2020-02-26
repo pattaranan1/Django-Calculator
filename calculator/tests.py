@@ -40,4 +40,22 @@ class CalculationTest(TestCase):
 
         response = self.client.post('/',data={'x':'1','y':'2','operator':'/'})
         self.assertEqual(response.context['result'],0.5)
-        
+    
+    def test_after_POST_pass_correct_history_and_order_to_template(self):
+        response = self.client.post('/',data={'x':'1','y':'2','operator':'+'})
+        self.assertEqual(response.context['history'][0],'1.0 + 2.0 = 3')
+
+        response = self.client.post('/',data={'x':'5','y':'1.2','operator':'-'})
+        self.assertEqual(response.context['history'][0],'5.0 - 1.2 = 3.8')
+        self.assertEqual(response.context['history'][1],'1.0 + 2.0 = 3')
+
+        response = self.client.post('/',data={'x':'2.5','y':'1.5','operator':'x'})
+        self.assertEqual(response.context['history'][0],'2.5 x 1.5 = 3.75')
+        self.assertEqual(response.context['history'][1],'5.0 - 1.2 = 3.8')
+        self.assertEqual(response.context['history'][2],'1.0 + 2.0 = 3')
+
+        response = self.client.post('/',data={'x':'1','y':'2','operator':'/'})
+        self.assertEqual(response.context['history'][0],'1.0 / 2.0 = 0.5')
+        self.assertEqual(response.context['history'][1],'2.5 x 1.5 = 3.75')
+        self.assertEqual(response.context['history'][2],'5.0 - 1.2 = 3.8')
+        self.assertEqual(response.context['history'][3],'1.0 + 2.0 = 3')
