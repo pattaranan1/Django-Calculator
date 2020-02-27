@@ -4,11 +4,18 @@ from calculator.models import CalculatedHistory
 
 
 def CalculationView(request):
+    history = list(CalculatedHistory.objects.all())[:-11:-1]
     if request.method == 'POST':
         form = CalculationForm(request.POST)
         if form.is_valid():
             x = form.cleaned_data['x']
             y = form.cleaned_data['y']
+
+            if request.POST.get('operator') == 'continue':
+                result_to_x = list(CalculatedHistory.objects.all())[-1].result
+                form = CalculationForm(data={'x':result_to_x})
+                return render(request,'calculator.html',{'form': form,'history':history})
+
             results = {'+':x+y,'-':x-y,'x':x*y,'/':x/y}
             result = results[request.POST.get('operator')]
 
@@ -17,7 +24,6 @@ def CalculationView(request):
             history = list(CalculatedHistory.objects.all())[:-11:-1]
             return render(request,'calculator.html',{'form':form,'result':result,'history':history})
     else:
-        history = list(CalculatedHistory.objects.all())[:-11:-1]
         form = CalculationForm()
     return render(request,'calculator.html',{'form': form,'history':history})
 
