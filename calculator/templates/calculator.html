@@ -11,7 +11,7 @@
         }
         
         .content {
-            max-width: 500px;
+            max-width: 800px;
             margin: auto;
         }
     </style>
@@ -24,16 +24,16 @@
     <div class='content'>
         <form action="" method='post'>
             {% csrf_token %}
-            <div class='card' style="padding: 10px; width:700px;">
+            <div class='card' style="padding: 10px; width:800px;">
                 <div class='row'>
-                    <div class='col form-group' style="margin: auto;"> {{form.as_p}}</div>
-                    <div class='col btn-group-vertical'>
-                        <div><button id='+' class="btn btn-secondary " type="submit" name="operator" value="+">+</div>
-                        <div><button id ='-' class="btn btn-secondary " type="submit" name="operator" value="-">-</div>
-                        <div><button id ='x' class="btn btn-secondary " type="submit" name="operator" value="x">x</div>
-                        <div><button id ='/' class="btn btn-secondary " type="submit" name="operator" value="/">/</div>
+                    <div class='col-sm-auto form-group' style="margin: auto;"> {{form.as_p}}</div>
+                    <div class='btn-group-vertical sticky-left' style="margin: 10px;">
+                        <div style="margin-bottom: 3px;"><button id='+' class="btn btn-secondary " type="submit" name="operator" value="+">+</div>
+                        <div style="margin-bottom: 3px;"><button id ='-' class="btn btn-secondary " type="submit" name="operator" value="-">-</div>
+                        <div style="margin-bottom: 3px;"><button id ='x' class="btn btn-secondary " type="submit" name="operator" value="x">x</div>
+                        <div style="margin-bottom: 3px;"><button id ='/' class="btn btn-secondary " type="submit" name="operator" value="/">/</div>
                         </div>
-                        <div class='col' id='history_list'>
+                        <div class='card col' id='history_list' style="white-space: nowrap; overflow: auto; padding: 10px;">
                             <h4>Calculation History</h4>
                             {% for item in history %}
                                 <div id='historyitem'>

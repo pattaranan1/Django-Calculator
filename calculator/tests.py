@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from calculator.views import CalculationView
 from calculator.forms import CalculationForm
-from calculator.models import Calculated_history
+from calculator.models import CalculatedHistory
 # Create your tests here.
 
 class CalculationTest(TestCase):
@@ -21,8 +21,8 @@ class CalculationTest(TestCase):
     
     def test_can_save_POST_into_calculation_history(self):
         self.client.post('/',data={'x':'1','y':'2','operator':'+'})
-        self.assertEqual(Calculated_history.objects.count(),1)
-        new_history = Calculated_history.objects.first()
+        self.assertEqual(CalculatedHistory.objects.count(),1)
+        new_history = CalculatedHistory.objects.first()
         self.assertEqual(new_history.x,1.0)
         self.assertEqual(new_history.y,2.0)
         self.assertEqual(new_history.operator,'+')

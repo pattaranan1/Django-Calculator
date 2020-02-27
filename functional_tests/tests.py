@@ -4,14 +4,14 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 import time
 import unittest
-from calculator.models import Calculated_history
+from calculator.models import CalculatedHistory
 
 class CalculationTest(LiveServerTestCase):
     
     def setUp(self):
         self.browser = webdriver.Firefox()
-        Calculated_history.objects.create(x=22.0,y=99.0,operator='-',result=-77.0)
-        Calculated_history.objects.create(x=34.0,y=10.0,operator='+',result=44.0)
+        CalculatedHistory.objects.create(x=22.0,y=99.0,operator='-',result=-77.0)
+        CalculatedHistory.objects.create(x=34.0,y=10.0,operator='+',result=44.0)
     
 
     def tearDown(self):

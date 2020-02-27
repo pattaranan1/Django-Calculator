@@ -1,4 +1,4 @@
 from django.contrib import admin
-from calculator.models import Calculated_history
+from calculator.models import CalculatedHistory
 # Register your models here.
-admin.site.register(Calculated_history)
+admin.site.register(CalculatedHistory)

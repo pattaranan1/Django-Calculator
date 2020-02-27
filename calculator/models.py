@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Calculated_history(models.Model):
+class CalculatedHistory(models.Model):
     x = models.FloatField()
     y = models.FloatField()
     operator = models.CharField(max_length=1)
