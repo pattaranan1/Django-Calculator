@@ -20,3 +20,9 @@ def CalculationView(request):
         history = list(CalculatedHistory.objects.all())[:-11:-1]
         form = CalculationForm()
     return render(request,'calculator.html',{'form': form,'history':history})
+
+def HomepageView(request):
+    return render(request,'homepage.html')
+
+def AboutmeView(request):
+    return render(request,'aboutme.html')
