@@ -20,8 +20,8 @@ from calculator_getmethod import views as calculator_get_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('aboutme',calculator_views.AboutmeView,name='aboutme'),
-    path('',calculator_views.HomepageView,name='homepage'),
-    path('calculator',calculator_views.CalculationView,name='calculation'),
-    path('calculator-get/',calculator_get_views.CalculationGetView,name='calculation-get'),
+    path('aboutme', calculator_views.AboutmeView, name='aboutme'),
+    path('', calculator_views.HomepageView, name='homepage'),
+    path('calculator', calculator_views.CalculationView, name='calculation'),
+    path('calculator-get/', calculator_get_views.CalculationGetView, name='calculation-get'),
 ]

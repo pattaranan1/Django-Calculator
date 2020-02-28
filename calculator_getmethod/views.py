@@ -5,15 +5,17 @@ from calculator_getmethod.forms import CalculationGetForm
 # Create your views here.
 
 def CalculationGetView(request):
-    x = request.GET.get('x')
-    y = request.GET.get('y')
-    if x != None and y != None:
-        x = float(x)
-        y = float(y)
-        results = {'+':x+y,'-':x-y,'x':x*y,'/':x/y}
-        result = results[request.GET.get('operator')]
-        #CalculatedGetHistory.objects.create(x=x,y=y,operator=request.GET.get('operator'),result=result)
-        #history = list(CalculatedGetHistory.objects.all())[:-11:-1]
-        return render(request,'calculatorget.html',{result:'result'})
+    if request.method == "GET":
+        form = CalculationGetForm(request.GET)
+        if form.is_valid():
+
+            x = form.cleaned_data['x']
+            y = form.cleaned_data['y']
+            results = {'+':x+y, '-':x-y, 'x':x*y, '/':x/y}
+            result = results[request.GET.get('operator')]
+            #CalculatedGetHistory.objects.create(x=x,y=y,operator=request.GET.get('operator'),result=result)
+            #history = list(CalculatedGetHistory.objects.all())[:-11:-1]
+            return render(request,'calculatorget.html',{'form':form,'result':result})
     else:
-        return render(request,'calculatorget.html')
+        form = CalculationGetForm()
+    return render(request,'calculatorget.html',{'form':form})

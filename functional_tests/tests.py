@@ -28,7 +28,7 @@ class CalculationTest(LiveServerTestCase):
         x.send_keys(_x)
         y.send_keys(_y)
         operator_btn.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(5)
     
     def check_result(self,_x,_y,_result):
 
@@ -42,15 +42,15 @@ class CalculationTest(LiveServerTestCase):
         
         self.assertEqual(_x,x)
         self.assertEqual(_y,y)
-        time.sleep(1)
+        time.sleep(5)
 
     def test_user_can_use_calculator_to_calculate(self):
 
         # Now Ronnie has a trouble with his calculator
         # He remember that there is a calculator on a website
         # Then He goes to calculator website 
-        self.browser.get(self.live_server_url)
-        time.sleep(1)
+        self.browser.get(self.live_server_url+'/calculator')
+        time.sleep(5)
 
         # He found that there is Calculator on the title and header of the website
 
@@ -70,12 +70,12 @@ class CalculationTest(LiveServerTestCase):
         # So he enter 121 into x ,and 555 into y ,then he click on '+' button 
 
         self.calculate('121','555','+')
-        time.sleep(1)
+        time.sleep(5)
 
         # Now he see the result of 121 + 555 = 676.0 in the result
         # And he see that there stll are 121 in x and 555 in y
         self.check_result('121','555','676.0')
-        time.sleep(1)
+        time.sleep(5)
 
         # In history list , He see a new history 121.0 + 555.0 = 676.0 in the first order
         history_list = self.browser.find_element_by_id('history_list')
@@ -87,7 +87,7 @@ class CalculationTest(LiveServerTestCase):
         # Then he want to calculate 1111 - 999
         # So he enter 1111 into x,and 999 into y,then he click on '-' button
         self.calculate('1111','999','-')
-        time.sleep(1)
+        time.sleep(5)
 
                 
         # Now he see the result of 1111 - 999 = 112.0 in the result
@@ -104,7 +104,7 @@ class CalculationTest(LiveServerTestCase):
         # Then he want to calculate 222 x 1.7
         # So he enter 222 into x,and 4 into y,then he click on 'x' button
         self.calculate('222','1.7','x')
-        time.sleep(1)
+        time.sleep(5)
         
         # Now he see the result of 222 x 1.7 = 377.4 in the result
         # And he see that there stll are 222 in x and 4 in y
@@ -121,7 +121,7 @@ class CalculationTest(LiveServerTestCase):
         # Then he want to calculate 75 / 12
         # So he enter 75 into x,and 12 into y,then he click on '/' button
         self.calculate('75','12','/')
-        time.sleep(1)
+        time.sleep(5)
         
         # Now he see the result of 75 / 12  = 6.25 in the result
         # And he see that there stll are 75 in x and 5 in y

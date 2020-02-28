@@ -1,0 +1,54 @@
+<html>
+<title>calculator</title>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+        button {
+            min-width: 40px;
+            max-width: 40px;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+    <title>calculator-get</title>
+    <h1 id='header' style="margin: 10px;">Calculator-GET</h1>
+    <hr>
+</head>
+
+<body>
+    <div class='content'>
+        <form action="" method='GET'>
+            {% csrf_token %}
+            <div class='card' style="padding: 10px; width:800px;">
+                <div class='row'>
+                    <div class='col-sm-auto form-group' style="margin: auto;">
+                        {{ form.as_p }}
+                    </div>
+                    <div class='btn-group-vertical sticky-left' style="margin: 10px;">
+                        <div style="margin-bottom: 3px;"><button id='+' class="btn btn-secondary " type="submit" name="operator" value="+">+</div>
+                        <div style="margin-bottom: 3px;"><button id ='-' class="btn btn-secondary " type="submit" name="operator" value="-">-</div>
+                        <div style="margin-bottom: 3px;"><button id ='x' class="btn btn-secondary " type="submit" name="operator" value="x">x</div>
+                        <div style="margin-bottom: 3px;"><button id ='/' class="btn btn-secondary " type="submit" name="operator" value="/">/</div>
+                        </div>
+                        <div class='card col' id='history_list' style="white-space: nowrap; overflow: auto; padding: 10px;">
+                            <h4>Calculation History</h4>
+                            {% for item in history %}
+                                <div id='historyitem'>
+                                    {{item}} 
+                                </div>
+                            {% endfor %}
+                        </div>
+            </div>
+            <div class='row'></div><span><strong>Result:</strong></span><span id="result">{{result}}</span></div>
+           </div>
+        </form>
+ 
+    </div>
+</body>
+
+</html>
